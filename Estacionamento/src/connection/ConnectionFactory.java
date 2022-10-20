@@ -38,7 +38,7 @@ public class ConnectionFactory {
         try{ 
             if(stmt != null){
                 stmt.close();
-            }
+            } 
         } catch(SQLException e){
             throw new RuntimeException ("Erro ao desconectar: ", e);
         }
