@@ -4,7 +4,8 @@
  * and open the template in the editor.
  */
 package view;
-
+import model.bean.Vaga;
+import model.dao.VagaDAO;
 /**
  *
  * @author 03832903097
@@ -48,7 +49,6 @@ public class JFCadastrarVaga extends javax.swing.JFrame {
         jLabel2.setText("Número");
 
         jTFNumero.setFont(new java.awt.Font("Gabriola", 0, 14)); // NOI18N
-        jTFNumero.setText("Ex: 13");
         jTFNumero.setName(""); // NOI18N
         jTFNumero.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -59,7 +59,6 @@ public class JFCadastrarVaga extends javax.swing.JFrame {
         jLabel3.setText("Rua");
 
         jTFRua.setFont(new java.awt.Font("Gabriola", 0, 14)); // NOI18N
-        jTFRua.setText("Ex: Rua Alfredo Wstphalen");
         jTFRua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTFRuaActionPerformed(evt);
@@ -79,6 +78,11 @@ public class JFCadastrarVaga extends javax.swing.JFrame {
         jBtnLimpar.setText("Limpar");
 
         jBtnSalvar.setText("Salvar");
+        jBtnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnSalvarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -95,7 +99,7 @@ public class JFCadastrarVaga extends javax.swing.JFrame {
                                     .addComponent(jLabel3))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTFNumero)
+                                    .addComponent(jTFNumero, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
                                     .addComponent(jTFRua)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
@@ -153,6 +157,19 @@ public class JFCadastrarVaga extends javax.swing.JFrame {
     private void jTFRuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFRuaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTFRuaActionPerformed
+
+    private void jBtnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalvarActionPerformed
+        Vaga v = new Vaga();     
+        VagaDAO dao = new VagaDAO();
+        v.setNumero(Integer.parseInt(jTFNumero.getText()));
+        v.setRua(jTFRua.getText());
+        if(jRBObliqua.isSelected()){
+            v.setObliqua (true);
+        } else if(jRBParalela.isSelected()){
+            v.setObliqua (false);
+        }
+        dao.create(v);
+    }//GEN-LAST:event_jBtnSalvarActionPerformed
 
     /**
      * @param args the command line arguments
