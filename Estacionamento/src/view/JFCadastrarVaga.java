@@ -42,7 +42,7 @@ public class JFCadastrarVaga extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Constantia", 0, 36)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Frank Ruhl Hofshi", 0, 36)); // NOI18N
         jLabel1.setText("Cadastrar Vaga");
 
         jLabel2.setText("Número");
@@ -141,7 +141,7 @@ public class JFCadastrarVaga extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jRadioButton1)
                         .addComponent(jRadioButton2)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2)
