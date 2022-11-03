@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package view;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.dao.VagaDAO;
 import model.bean.Vaga;
@@ -32,9 +33,9 @@ public class JFListarVagas extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTVaga = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jBtnCadastrar = new javax.swing.JButton();
+        jBtnEditar = new javax.swing.JButton();
+        jBtnExcluir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -72,19 +73,24 @@ public class JFListarVagas extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTVaga);
         jTVaga.getAccessibleContext().setAccessibleName("");
 
-        jButton1.setFont(new java.awt.Font("Corbel Light", 0, 14)); // NOI18N
-        jButton1.setText("Cadastrar Vaga");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jBtnCadastrar.setFont(new java.awt.Font("Corbel Light", 0, 14)); // NOI18N
+        jBtnCadastrar.setText("Cadastrar Vaga");
+        jBtnCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jBtnCadastrarActionPerformed(evt);
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Corbel Light", 0, 14)); // NOI18N
-        jButton2.setText("Editar Vaga");
+        jBtnEditar.setFont(new java.awt.Font("Corbel Light", 0, 14)); // NOI18N
+        jBtnEditar.setText("Editar Vaga");
 
-        jButton3.setFont(new java.awt.Font("Corbel Light", 0, 14)); // NOI18N
-        jButton3.setText("Excluir Vaga");
+        jBtnExcluir.setFont(new java.awt.Font("Corbel Light", 0, 14)); // NOI18N
+        jBtnExcluir.setText("Excluir Vaga");
+        jBtnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnExcluirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -95,45 +101,59 @@ public class JFListarVagas extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(84, 84, 84)
-                        .addComponent(jButton1)
+                        .addComponent(jBtnCadastrar)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2)
+                        .addComponent(jBtnEditar)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton3)
+                        .addComponent(jBtnExcluir)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
-                        .addContainerGap())))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(180, 180, 180)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(12, 12, 12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(jBtnCadastrar)
+                    .addComponent(jBtnEditar)
+                    .addComponent(jBtnExcluir))
                 .addContainerGap(181, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jBtnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCadastrarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jBtnCadastrarActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
       readJTable();
       
         // TODO add your handling code here:
     }//GEN-LAST:event_formWindowOpened
+
+    private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
+         if(jTVaga.getSelectedRow() != -1){
+             int opcao = JOptionPane.showConfirmDialog(null, "Deseja excluir a vaga selecionada?", "Exclusão", JOptionPane.YES_NO_OPTION);
+             if(opcao == 0){
+                 VagaDAO dao = new VagaDAO();
+                 Vaga v = new Vaga();
+                 v.setIdVaga((int)jTVaga.getValueAt(jTVaga.getSelectedRow(), 0));
+                 dao.delete(v);
+             }
+         } else{
+             JOptionPane.showMessageDialog(null, "Selecione uma vaga!", "Erro", JOptionPane.ERROR_MESSAGE);
+         }
+         readJTable();
+    }//GEN-LAST:event_jBtnExcluirActionPerformed
     public void readJTable(){
         DefaultTableModel modelo = (DefaultTableModel) jTVaga.getModel();
         modelo.setNumRows(0);
@@ -183,9 +203,9 @@ public class JFListarVagas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jBtnCadastrar;
+    private javax.swing.JButton jBtnEditar;
+    private javax.swing.JButton jBtnExcluir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTVaga;
