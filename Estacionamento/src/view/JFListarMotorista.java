@@ -8,6 +8,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.dao.MotoristaDAO;
 import model.bean.Motorista;
+import model.bean.Vaga;
+import model.dao.VagaDAO;
 /**
  *
  * @author 03832903097
@@ -88,6 +90,11 @@ public class JFListarMotorista extends javax.swing.JFrame {
 
         jBtnExcluir.setFont(new java.awt.Font("Corbel Light", 0, 14)); // NOI18N
         jBtnExcluir.setText("Excluir Motorista");
+        jBtnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnExcluirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -137,6 +144,21 @@ public class JFListarMotorista extends javax.swing.JFrame {
     readJTable();
               // TODO add your handling code here:
     }//GEN-LAST:event_formWindowOpened
+
+    private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
+    if(jTMotorista.getSelectedRow() != -1){
+             int opcao = JOptionPane.showConfirmDialog(null, "Deseja excluir o motorista selecionado?", "Exclusão", JOptionPane.YES_NO_OPTION);
+             if(opcao == 0){
+                 MotoristaDAO dao = new MotoristaDAO();
+                 Motorista m = new Motorista();
+                 m.setIdMotorista((int)jTMotorista.getValueAt(jTMotorista.getSelectedRow(), 0));
+                 dao.delete(m);
+             }
+         } else{
+             JOptionPane.showMessageDialog(null, "Selecione um motorista!", "Erro", JOptionPane.ERROR_MESSAGE);
+         }
+         readJTable();        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnExcluirActionPerformed
     
     public void readJTable(){
         DefaultTableModel modelo = (DefaultTableModel) jTMotorista.getModel();
