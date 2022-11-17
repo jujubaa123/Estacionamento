@@ -12,6 +12,7 @@ import model.dao.VagaDAO;
  */
 public class JFAtualizarVaga extends javax.swing.JFrame {
 
+    private static int idVaga;
     /**
      * Creates new form JFAtualizarVaga
      */
@@ -29,10 +30,6 @@ public class JFAtualizarVaga extends javax.swing.JFrame {
         }
         
         
-    }
-
-    private JFAtualizarVaga() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -136,14 +133,19 @@ public class JFAtualizarVaga extends javax.swing.JFrame {
                                     .addComponent(jTFNumero, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
                                     .addComponent(jTFRua)))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(18, 18, 18)
-                                .addComponent(jRBObliqua)
-                                .addGap(18, 18, 18)
-                                .addComponent(jRBParalela))
-                            .addGroup(layout.createSequentialGroup()
                                 .addGap(63, 63, 63)
-                                .addComponent(jLabel1)))
+                                .addComponent(jLabel1))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(lblIdVaga)
+                                    .addGap(136, 136, 136)
+                                    .addComponent(jLabel5))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel4)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jRBObliqua)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jRBParalela))))
                         .addGap(0, 92, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -153,12 +155,6 @@ public class JFAtualizarVaga extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jBtnCancelar)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblIdVaga)
-                .addGap(129, 129, 129)
-                .addComponent(jLabel5)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -194,7 +190,17 @@ public class JFAtualizarVaga extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalvarActionPerformed
- 
+        Vaga v = new Vaga();
+        VagaDAO vdao = new VagaDAO();
+        v.setIdVaga(Integer.parseInt(lblIdVaga.getText()));
+        v.setNumero(Integer.parseInt(jTFNumero.getText()));
+        v.setRua(jTFRua.getText());
+        if(jRBObliqua.isSelected()){
+            v.setObliqua(true);
+        }else if (jRBParalela.isSelected()){
+            v.setObliqua (false);   
+        }
+       vdao.update(v); 
     }//GEN-LAST:event_jBtnSalvarActionPerformed
 
     private void jTFRuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFRuaActionPerformed
@@ -239,7 +245,8 @@ public class JFAtualizarVaga extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JFAtualizarVaga().setVisible(true);
+                JFAtualizarVaga frame = new JFAtualizarVaga(idVaga);
+                frame.setVisible(true);
             }
         });
     }

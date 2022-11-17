@@ -83,6 +83,11 @@ public class JFListarVagas extends javax.swing.JFrame {
 
         jBtnEditar.setFont(new java.awt.Font("Corbel Light", 0, 14)); // NOI18N
         jBtnEditar.setText("Editar Vaga");
+        jBtnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnEditarActionPerformed(evt);
+            }
+        });
 
         jBtnExcluir.setFont(new java.awt.Font("Corbel Light", 0, 14)); // NOI18N
         jBtnExcluir.setText("Excluir Vaga");
@@ -154,6 +159,17 @@ public class JFListarVagas extends javax.swing.JFrame {
          }
          readJTable();
     }//GEN-LAST:event_jBtnExcluirActionPerformed
+
+    private void jBtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarActionPerformed
+        if(jTVaga.getSelectedRow() != -1){
+            int vagaSelecionada = (int) jTVaga.getValueAt(jTVaga.getSelectedRow(), 0);
+            JFAtualizarVaga av = new JFAtualizarVaga(vagaSelecionada);
+            av.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(null, "Selecione uma vaga!", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+        readJTable();
+    }//GEN-LAST:event_jBtnEditarActionPerformed
     public void readJTable(){
         DefaultTableModel modelo = (DefaultTableModel) jTVaga.getModel();
         modelo.setNumRows(0);
