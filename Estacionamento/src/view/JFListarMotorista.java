@@ -133,7 +133,14 @@ public class JFListarMotorista extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarActionPerformed
-        // TODO add your handling code here:
+        if(jTMotorista.getSelectedRow() != -1){
+            int motoristaSelecionado = (int) jTMotorista.getValueAt(jTMotorista.getSelectedRow(), 0);
+            JFAtualizarMotorista am = new JFAtualizarMotorista(motoristaSelecionado);
+            am.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(null, "Selecione um Motorista!", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+        readJTable();
     }//GEN-LAST:event_jBtnEditarActionPerformed
 
     private void formWindowStateChanged(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowStateChanged
@@ -171,6 +178,7 @@ public class JFListarMotorista extends javax.swing.JFrame {
             m.getGenero(),
             m.getRg(),  
             m.getCpf(),
+            m.getCelular(),
             m.getEmail(),
             m.getSenha()
         });

@@ -76,6 +76,7 @@ public class MotoristaDAO {
                m.setGenero(rs.getString("genero"));
                m.setRg(rs.getInt("rg"));
                m.setCpf(rs.getInt("cpf"));
+               m.setCelular(rs.getInt("celular"));
                m.setEmail(rs.getString("email"));
                m.setSenha(rs.getString("senha"));
                motoristas.add(m);
@@ -87,4 +88,54 @@ public class MotoristaDAO {
        }
         return motoristas;
        }
+       
+       public Motorista read(int idMotorista){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Motorista m = new Motorista();
+        
+        try{
+            stmt = con.prepareStatement("SELECT * FROM motorista WHERE idMotorista =? LIMIT 1;");
+            stmt.setInt(1,idMotorista);
+            rs = stmt.executeQuery();
+            if(rs != null && rs.next()){
+               m.setIdMotorista(rs.getInt("idMotorista"));
+               m.setNome(rs.getString("nome"));
+               m.setGenero(rs.getString("genero"));
+               m.setRg(rs.getInt("rg"));
+               m.setCpf(rs.getInt("cpf"));
+               m.setCelular(rs.getInt("celular"));
+               m.setEmail(rs.getString("email"));
+               m.setSenha(rs.getString("senha"));
+            }
+        } catch(SQLException e){
+            throw new RuntimeException("Erro a buscar os dados ", e );
+        }finally{
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+        return m;
+    } 
+       
+       public void update(Motorista m){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        try{
+            stmt = con.prepareStatement("UPDATE motorista SET nome=?, genero=?, rg=?, cpf=?, celular=?, email=?, senha=?  WHERE idMotorista=? ");
+            stmt.setString(1, m.getNome());
+            stmt.setString(2, m.getGenero());
+            stmt.setInt(3, m.getRg());
+            stmt.setInt(4, m.getCpf());
+            stmt.setInt(5, m.getCelular());
+            stmt.setString(6, m.getEmail());
+            stmt.setString(7, m.getSenha());
+            stmt.setInt(8, m.getIdMotorista());
+            stmt.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Motorista atualizado com sucesso!");
+        } catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar: " + e);
+        } finally{
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+    }
     }
