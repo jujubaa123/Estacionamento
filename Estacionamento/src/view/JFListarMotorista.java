@@ -40,6 +40,7 @@ public class JFListarMotorista extends javax.swing.JFrame {
         jBtnExcluir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Listar Motorista");
         addWindowStateListener(new java.awt.event.WindowStateListener() {
             public void windowStateChanged(java.awt.event.WindowEvent evt) {
                 formWindowStateChanged(evt);
@@ -79,6 +80,11 @@ public class JFListarMotorista extends javax.swing.JFrame {
 
         jBtnCadastrar.setFont(new java.awt.Font("Corbel Light", 0, 14)); // NOI18N
         jBtnCadastrar.setText("Cadastrar Motorista");
+        jBtnCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCadastrarActionPerformed(evt);
+            }
+        });
 
         jBtnEditar.setFont(new java.awt.Font("Corbel Light", 0, 14)); // NOI18N
         jBtnEditar.setText("Editar Motorista");
@@ -166,6 +172,11 @@ public class JFListarMotorista extends javax.swing.JFrame {
          }
          readJTable();        // TODO add your handling code here:
     }//GEN-LAST:event_jBtnExcluirActionPerformed
+
+    private void jBtnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCadastrarActionPerformed
+        JFCadastrarMotorista cm = new JFCadastrarMotorista();
+        cm.setVisible(true);
+    }//GEN-LAST:event_jBtnCadastrarActionPerformed
     
     public void readJTable(){
         DefaultTableModel modelo = (DefaultTableModel) jTMotorista.getModel();

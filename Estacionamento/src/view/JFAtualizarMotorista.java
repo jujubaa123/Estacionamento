@@ -59,7 +59,8 @@ public class JFAtualizarMotorista extends javax.swing.JFrame {
         jBtnSalvar = new javax.swing.JButton();
         lblIdMotorista = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Atualizar  Motorista");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
         jLabel1.setText("Atualizar Motorista");
@@ -102,9 +103,19 @@ public class JFAtualizarMotorista extends javax.swing.JFrame {
 
         jBtnCancelar.setFont(new java.awt.Font("Gabriola", 0, 18)); // NOI18N
         jBtnCancelar.setText("Cancelar");
+        jBtnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCancelarActionPerformed(evt);
+            }
+        });
 
         jBtnLimpar.setFont(new java.awt.Font("Gabriola", 0, 18)); // NOI18N
         jBtnLimpar.setText("Limpar");
+        jBtnLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnLimparActionPerformed(evt);
+            }
+        });
 
         jBtnSalvar.setFont(new java.awt.Font("Gabriola", 0, 18)); // NOI18N
         jBtnSalvar.setText("Atualizar");
@@ -229,6 +240,20 @@ public class JFAtualizarMotorista extends javax.swing.JFrame {
 
         dao.update(m);
     }//GEN-LAST:event_jBtnSalvarActionPerformed
+
+    private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
+        dispose();
+    }//GEN-LAST:event_jBtnCancelarActionPerformed
+
+    private void jBtnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnLimparActionPerformed
+        jTFNome.setText("");
+        jTFGenero.setText("");
+        jTFRg.setText("");
+        jTFCpf.setText("");
+        jTFCelular.setText("");
+        jTFEmail.setText("");
+        jPFSenha.setText("");
+    }//GEN-LAST:event_jBtnLimparActionPerformed
 
     /**
      * @param args the command line arguments
